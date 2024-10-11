@@ -108,14 +108,14 @@ int prio(char operator) {
 
 
 Token* shunting_yard(Token* tokens) {
-    Token* output_tokens = malloc(255 * sizeof(Token));  // Tableau pour stocker les tokens en sortie
+    Token* output_tokens = malloc(255 * sizeof(Token));
     char operators[255] = {0};
     int output_i = 0;
     int operators_i = 0;
 
     for (int i = 0; tokens[i].type != TOKEN_EOF; i++) {
         if (tokens[i].type == TOKEN_IDENTIFIER || tokens[i].type == TOKEN_NUMBER) {
-            output_tokens[output_i++] = *create_token(tokens[i].type, tokens[i].value);  // Ajout à la sortie
+            output_tokens[output_i++] = *create_token(tokens[i].type, tokens[i].value);
         }
         else if (tokens[i].type == TOKEN_OPAREN) {
             operators[operators_i++] = tokens[i].value[0];
@@ -123,14 +123,14 @@ Token* shunting_yard(Token* tokens) {
         else if (tokens[i].type == TOKEN_CPAREN) {
             while (operators_i > 0 && operators[operators_i - 1] != '(') {
                 char op[2] = {operators[--operators_i], '\0'};
-                output_tokens[output_i++] = *create_token(TOKEN_OPERATOR, op);  // Ajout de l'opérateur
+                output_tokens[output_i++] = *create_token(TOKEN_OPERATOR, op);
             }
-            operators_i--;  // Supprime la parenthèse ouvrante
+            operators_i--;
         }
         else if (tokens[i].type == TOKEN_OPERATOR) {
             while (operators_i > 0 && prio(operators[operators_i - 1]) >= prio(tokens[i].value[0])) {
                 char op[2] = {operators[--operators_i], '\0'};
-                output_tokens[output_i++] = *create_token(TOKEN_OPERATOR, op);  // Ajout de l'opérateur
+                output_tokens[output_i++] = *create_token(TOKEN_OPERATOR, op);
             }
             operators[operators_i++] = tokens[i].value[0];
         }
@@ -138,10 +138,10 @@ Token* shunting_yard(Token* tokens) {
 
     while (operators_i > 0) {
         char op[2] = {operators[--operators_i], '\0'};
-        output_tokens[output_i++] = *create_token(TOKEN_OPERATOR, op);  // Ajout des opérateurs restants
+        output_tokens[output_i++] = *create_token(TOKEN_OPERATOR, op);
     }
 
-    output_tokens[output_i++] = *create_token(TOKEN_EOF, "EOF");  // Marque la fin des tokens
+    output_tokens[output_i++] = *create_token(TOKEN_EOF, "EOF");
 
-    return output_tokens;  // Retourne le tableau de tokens
+    return output_tokens;
 }

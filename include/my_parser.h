@@ -9,4 +9,4 @@ extern  Token* expression_new_identifier(Token* tokens);
 extern  Token* expression_edit_value(Token* tokens);
 extern  Token* shunting_yard(Token* tokens);
 
-#endif // PARSER_H
+#endif
