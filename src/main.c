@@ -8,10 +8,8 @@ int main() {
     fgets(input, 256, stdin);
 
     Token* tokens = lexer(input);
-
-
-
     Token* expression_tokens;
+
 
     if (tokens[0].type == TOKEN_FONCTION) {
         expression_tokens = expression_in_fonction_tokens(tokens);
@@ -22,16 +20,14 @@ int main() {
     }
 
 
-    printf("//////////////////////////////////\n");
-
     Token* Shunting_Yard_expression = shunting_yard(expression_tokens);
 
 
-    printf("////////////////////////////////\n");
     for (int i = 0; Shunting_Yard_expression[i].type != TOKEN_EOF; i++) {
         printf("%s ", Shunting_Yard_expression[i].value);
     }
-    printf("\n");
+    printf("\n\n");
+
 
     free(tokens);
     free(expression_tokens);

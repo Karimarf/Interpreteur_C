@@ -101,10 +101,3 @@ Token* lexer(const char* input) {
     tokens[token_count++] = *create_token(TOKEN_EOF, "EOF");
     return tokens;
 }
-
-
-
-
-
-
-
