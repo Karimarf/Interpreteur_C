@@ -2,12 +2,17 @@
 #include <stdlib.h>
 #include "..\include\lexer.h"
 #include "..\include\my_parser.h"
+#include "..\include\error.h"
+
 
 int main() {
     char input[256];
     fgets(input, 256, stdin);
 
     Token* tokens = lexer(input);
+
+    Token* errors = inputs_error(tokens);
+
     Token* expression_tokens;
 
 
@@ -28,9 +33,10 @@ int main() {
     }
     printf("\n\n");
 
-
     free(tokens);
+    free(Shunting_Yard_expression);
     free(expression_tokens);
+
 
     return 0;
 }
