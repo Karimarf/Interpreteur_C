@@ -32,7 +32,7 @@ StackItem* createStackItem(Node* node) {
 void push(Stack* stack, Node* node) {
     StackItem* newItem = createStackItem(node);
     if(!newItem) {
-        printf("oof\n");
+        printf("oof StackItem\n");
         return;
     }
     newItem->nextItem = stack->stackHead;
@@ -58,6 +58,9 @@ Node* create_ast(Token* shunting_yd_exp) {
     Node* Shunting_yard_nodes = NULL;
     for (int i = 0; shunting_yd_exp[i].type != TOKEN_EOF; i++) {
         Shunting_yard_nodes = createNode(&shunting_yd_exp[i]);
+        if (!Shunting_yard_nodes) {
+            printf("oof Node \n");
+        }
         if(shunting_yd_exp[i].type == TOKEN_NUMBER) {
             push(&stack, Shunting_yard_nodes);
         } else if (shunting_yd_exp[i].type == TOKEN_OPERATOR) {
