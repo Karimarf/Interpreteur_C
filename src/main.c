@@ -41,6 +41,7 @@ int main() {
     int result  = evaluate(ast);
     printf("\nRESULT: %d\n", result);
 
+    freeAST(ast);
     free(tokens);
     free(expression_tokens);
 

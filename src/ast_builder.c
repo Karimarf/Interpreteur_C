@@ -46,11 +46,15 @@ Node* pop(Stack* stack) {
     }
     else {
         Node* temp = stack->stackHead->nodeStack;
-        stack->stackHead = stack->stackHead->nextItem;
+        StackItem* head =  stack->stackHead;
+        stack->stackHead = head->nextItem;
+        free(head);
         return temp;
     }
 
+
 }
+
 
 Node* create_ast(Token* shunting_yd_exp) {
     Stack stack;
@@ -103,4 +107,15 @@ int evaluate(Node* node) {
                 return 0;
         }
     }
+}
+
+void freeAST(Node* node) {
+    if(node->leftNode == NULL && node->rightNode == NULL) {
+        free(node);
+    }else {
+        evaluate(node->leftNode);
+        evaluate(node->rightNode);
+        free(node);
+    }
+
 }

@@ -30,6 +30,7 @@ Node* pop(Stack* stack);
 Node* create_ast(Token* shunting_yd_exp);
 void printAst(Node* node);
 int evaluate(Node* node);
+void freeAST(Node* node);
 
 
 #endif
