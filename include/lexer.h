@@ -6,6 +6,7 @@ typedef enum {
     TOKEN_NUMBER,
     TOKEN_IDENTIFIER,
     TOKEN_OPERATOR,
+    TOKEN_QUOT,
     TOKEN_ASSIGN,
     TOKEN_OPAREN,
     TOKEN_CPAREN,
@@ -13,7 +14,6 @@ typedef enum {
     TOKEN_TYPE,
     TOKEN_FONCTION,
     TOKEN_EOF,
-    TOKEN_ERROR,
 } TokenType;
 
 typedef struct {

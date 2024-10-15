@@ -11,6 +11,7 @@ int main() {
 
     Token* tokens = lexer(input);
 
+
     Token* errors = inputs_error(tokens);
 
     Token* expression_tokens;
