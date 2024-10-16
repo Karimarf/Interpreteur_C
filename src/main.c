@@ -17,10 +17,9 @@ int main() {
 
     Token* expression_tokens;
 
-
     if (tokens[0].type == TOKEN_FONCTION) {
         expression_tokens = expression_in_fonction_tokens(tokens);
-    } else if (tokens[0].type == TOKEN_TYPE && strcmp(tokens[0].value, "string") == 0) {
+    } else if (tokens[0].type == TOKEN_TYPE && strcmp(tokens[0].value, "char") == 0) {
     }else if (tokens[0].type == TOKEN_IDENTIFIER) {
         expression_tokens = expression_in_identifier(tokens);
     }

@@ -55,19 +55,19 @@ Token *inputs_error(Token *tokens) {
         }
 
         if (tokens[i].type == TOKEN_ASSIGN) {
-            if (tokens[i - 1].type == TOKEN_TYPE && strcmp(tokens[i - 1].value, "char") == 0) {
-                if (tokens[i + 1].type != TOKEN_QUOT) {
-                    printf("Erreur 7 : Opérateur '=' suivi de '%s' impossible. Attendu une valeur de type char (entre guillemets).\n", tokens[i + 1].value);
+            if (strcmp(tokens[i - 1].value, "char") == 0) {
+                if (tokens[i + 1].type != TOKEN_QUOT || tokens[i + 2].type != TOKEN_IDENTIFIER || tokens[i + 3].type != TOKEN_QUOT) {
+                    printf("Erreur 7 : Opérateur '=' suivi de '%s' impossible. Attendu une valeur de type char entourée de guillemets.\n", tokens[i + 1].value);
                     exit(EXIT_FAILURE);
                 }
-            } else if (tokens[i - 1].type == TOKEN_TYPE && strcmp(tokens[i - 1].value, "int") == 0) {
-                // Si c'est un type int, on conserve l'ancienne logique
+            } else if (strcmp(tokens[i - 1].value, "int") == 0) {
                 if (tokens[i + 1].type != TOKEN_IDENTIFIER && tokens[i + 1].type != TOKEN_NUMBER && tokens[i + 1].type != TOKEN_OPAREN) {
                     printf("Erreur 7 : Opérateur '=' suivi de '%s' impossible.\n", tokens[i + 1].value);
                     exit(EXIT_FAILURE);
                 }
             }
         }
+
 
         if (tokens[i].type == TOKEN_TYPE && tokens[i + 1].type == TOKEN_IDENTIFIER && tokens[i + 2].type !=
             TOKEN_ASSIGN) {

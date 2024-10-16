@@ -4,7 +4,7 @@
 #include "..\include\lexer.h"
 
 
-extern Token* inputs_error(Token* tokens) ;
+Token* inputs_error(Token* tokens) ;
 
 
 #endif
