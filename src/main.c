@@ -1,19 +1,21 @@
 #include <stdio.h>
 #include <stdlib.h>
+
+#include "../include/lexer.h"
+#include "../include/my_parser.h"
+#include "../include/ast_builder.h"
 #include <string.h>
-#include "..\include\lexer.h"
-#include "..\include\my_parser.h"
 #include "..\include\error.h"
+
 
 
 int main() {
     char input[256];
     fgets(input, 256, stdin);
-
     Token* tokens = lexer(input);
 
-
     Token* errors = inputs_error(tokens);
+
 
     Token* expression_tokens;
 
@@ -30,14 +32,29 @@ int main() {
     }
 
 
+    printf("//////////////////////////////////\n");
+
     Token* Shunting_Yard_expression = shunting_yard(expression_tokens);
+    printf("////////////////////////////////\n");
 
 
     for (int i = 0; Shunting_Yard_expression[i].type != TOKEN_EOF; i++) {
-        printf("%s ", Shunting_Yard_expression[i].value);
+        printf("%s", Shunting_Yard_expression[i].value);
     }
+
+
     printf("\n\n");
 
+
+    Node* ast = create_ast(Shunting_Yard_expression);
+    printf("\nPRINT AST\n");
+    printAst(ast);
+
+    printf("\nEVALUATE AST\n");
+    int result  = evaluate(ast);
+    printf("\nRESULT: %d\n", result);
+
+    freeAST(ast);
     free(tokens);
     free(Shunting_Yard_expression);
     free(expression_tokens);
