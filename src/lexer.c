@@ -92,6 +92,20 @@ Token* lexer(const char* input) {
             i++;
             continue;
         }
+
+        if (input[i] == '"') {
+            tokens[token_count++] = *create_token(TOKEN_QUOT, "\"");
+            i++;
+            continue;
+        }
+
+        if (input[i] == '\'') {
+            tokens[token_count++] = *create_token(TOKEN_QUOT, "'");
+            i++;
+            continue;
+        }
+
+
         if (input[i] == ';') {
             tokens[token_count++] = *create_token(TOKEN_SEMICOLON, ";");
             break;
@@ -101,10 +115,3 @@ Token* lexer(const char* input) {
     tokens[token_count++] = *create_token(TOKEN_EOF, "EOF");
     return tokens;
 }
-
-
-
-
-
-
-
