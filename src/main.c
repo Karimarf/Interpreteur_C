@@ -1,11 +1,11 @@
 #include <stdio.h>
 #include <stdlib.h>
-
+#include <string.h>
 #include "../include/lexer.h"
 #include "../include/my_parser.h"
+#include "../include/error.h"
 #include "../include/ast_builder.h"
-#include <string.h>
-#include "..\include\error.h"
+
 
 
 

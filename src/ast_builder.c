@@ -2,8 +2,6 @@
 #include <stdio.h>
 #include "../include/ast_builder.h"
 
-#include <math.h>
-#include <my_parser.h>
 
 void initStack(Stack* stack) {
     stack->stackHead = NULL;
