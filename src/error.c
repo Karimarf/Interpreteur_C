@@ -99,7 +99,7 @@ Token *inputs_error(Token *tokens) {
     for (int j = 0; tokens[j].type != TOKEN_EOF; j++) {
         if (tokens[j].type == TOKEN_ASSIGN || tokens[j].type == TOKEN_FONCTION || tokens[j].type == TOKEN_TYPE) {
             has_assign_or_func_or_type = 1;
-            break;  // On peut arrêter la boucle, car on a trouvé un élément valide
+            break;
         }
     }
 
