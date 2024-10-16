@@ -6,6 +6,7 @@ typedef enum {
     TOKEN_NUMBER,
     TOKEN_IDENTIFIER,
     TOKEN_OPERATOR,
+    TOKEN_QUOT,
     TOKEN_ASSIGN,
     TOKEN_OPAREN,
     TOKEN_CPAREN,
@@ -13,7 +14,6 @@ typedef enum {
     TOKEN_TYPE,
     TOKEN_FONCTION,
     TOKEN_EOF,
-    TOKEN_ERROR,
 } TokenType;
 
 typedef struct {
@@ -21,11 +21,11 @@ typedef struct {
     char* value;
 } Token;
 
-extern Token* lexer(const char* input);
-extern Token* create_token(TokenType type, const char* value);
-extern void free_tokens(Token* tokens);
-extern int is_number(char c);
-extern int is_letter(char c);
-extern int is_operator(char c);
+Token* lexer(const char* input);
+Token* create_token(TokenType type, const char* value);
+void free_tokens(Token* tokens);
+int is_number(char c);
+int is_letter(char c);
+int is_operator(char c);
 
 #endif

@@ -55,6 +55,22 @@ Token* expression_in_fonction_tokens(Token* tokens) {
     return expression_tokens;
 }
 
+Token* expression_in_identifier(Token* tokens) {
+    int token_count = 0;
+
+    for (int i = 2; tokens[i].type != TOKEN_EOF && tokens[i].type != TOKEN_SEMICOLON; i++) {
+        token_count++;
+    }
+    Token* expression_tokens = malloc((token_count + 1) * sizeof(Token));
+    int j = 0;
+    for (int i = 2; tokens[i].type != TOKEN_EOF && tokens[i].type != TOKEN_SEMICOLON; i++) {
+        expression_tokens[j++] = tokens[i];
+    }
+    expression_tokens[j] = *create_token(TOKEN_EOF, "EOF");
+    return expression_tokens;
+}
+
+
 
 Token* expression_new_identifier(Token* tokens) {
     int token_count = 0;
@@ -63,9 +79,7 @@ Token* expression_new_identifier(Token* tokens) {
             token_count++;
         }
     }
-
     Token* expression_tokens = malloc((token_count + 1) * sizeof(Token));
-
     int j = 0;
     for (int i = 2; tokens[i].type != TOKEN_EOF; i++) {
         if (tokens[i].type != TOKEN_ASSIGN && tokens[i].type != TOKEN_SEMICOLON) {
@@ -83,9 +97,7 @@ Token* expression_edit_value(Token* tokens) {
             token_count++;
         }
     }
-
     Token* expression_tokens = malloc((token_count + 1) * sizeof(Token));
-
     int j = 0;
     for (int i = 2; tokens[i].type != TOKEN_EOF; i++) {
         if (tokens[i].type != TOKEN_ASSIGN && tokens[i].type != TOKEN_SEMICOLON) {
