@@ -5,11 +5,14 @@
 #include "../include/my_parser.h"
 #include "../include/ast_builder.h"
 #include <string.h>
-#include "..\include\error.h"
+
+#include "assign.h"
+#include "../include/error.h"
 
 
 
-int main() {
+int main()
+{
     char input[256];
     fgets(input, 256, stdin);
     Token* tokens = lexer(input);
@@ -22,7 +25,8 @@ int main() {
     if (tokens[0].type == TOKEN_FONCTION) {
         expression_tokens = expression_in_fonction_tokens(tokens);
     } else if (tokens[0].type == TOKEN_TYPE && strcmp(tokens[0].value, "char") == 0) {
-    }else if (tokens[0].type == TOKEN_IDENTIFIER) {
+    }
+    else if (tokens[0].type == TOKEN_IDENTIFIER) {
         expression_tokens = expression_in_identifier(tokens);
     }
     else if (tokens[0].type == TOKEN_TYPE && tokens[2].type == TOKEN_ASSIGN) {
@@ -31,9 +35,9 @@ int main() {
         expression_tokens = expression_edit_value(tokens);
     }
 
-
     printf("//////////////////////////////////\n");
 
+    Token* assignment_token = expression_assign(tokens);
     Token* Shunting_Yard_expression = shunting_yard(expression_tokens);
     printf("////////////////////////////////\n");
 
@@ -45,17 +49,31 @@ int main() {
 
     printf("\n\n");
 
+    if(assignment_token[0].type == TOKEN_IDENTIFIER && assignment_token[1].type == TOKEN_ASSIGN)
+    {
+        printf("\n ASSIGN \n");
+        assign(assignment_token);
+    }
+    else if (assignment_token[0].type == TOKEN_FONCTION)
+    {
+        printf("\n PRINT \n");
+        printf("%d \n",print_v(assignment_token));
+    }
+    else
+    {
+        Node* ast = create_ast(Shunting_Yard_expression);
+        printf("\nPRINT AST\n");
+        printAst(ast);
 
-    Node* ast = create_ast(Shunting_Yard_expression);
-    printf("\nPRINT AST\n");
-    printAst(ast);
+        printf("\nEVALUATE AST\n");
+        int result  = evaluate(ast);
+        printf("\nRESULT: %d\n", result);
 
-    printf("\nEVALUATE AST\n");
-    int result  = evaluate(ast);
-    printf("\nRESULT: %d\n", result);
+        freeAST(ast);
+    }
 
-    freeAST(ast);
     free(tokens);
+    free(assignment_token);
     free(Shunting_Yard_expression);
     free(expression_tokens);
 
