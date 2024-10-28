@@ -51,7 +51,7 @@ Token* expression_in_fonction_tokens(Token* tokens) {
 
         i++;
     }
-    expression_tokens[token_count++] = *create_token(TOKEN_EOF, "EOF");
+    expression_tokens[token_count] = *create_token(TOKEN_EOF, "EOF");
     return expression_tokens;
 }
 

@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "..\include\error.h"
+#include "../include/error.h"
 
 Token *inputs_error(Token *tokens) {
     int parentheses_balance = 0;
