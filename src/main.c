@@ -5,11 +5,13 @@
 #include "../include/assign.h"
 #include "../include/my_parser.h"
 #include "../include/ast_builder.h"
-#include "..\include\error.h"
+#include "assign.h"
+#include "../include/error.h"
 
 
 
-int main() {
+int main()
+{
     char input[256];
 
     while (1) {
@@ -67,9 +69,6 @@ int main() {
 
     printf("\n\n");
 
-        Node* ast = create_ast(Shunting_Yard_expression);
-        printf("\nPRINT AST\n");
-        printAst(ast);
     if(assignment_token[0].type == TOKEN_IDENTIFIER && assignment_token[1].type == TOKEN_ASSIGN)
     {
         printf("\n ASSIGN \n");
@@ -90,7 +89,6 @@ int main() {
         int result  = evaluate(ast);
         printf("\nRESULT: %d\n", result);
 
-        freeAST(ast);
         free(tokens);
         free(Shunting_Yard_expression);
         free(expression_tokens);
