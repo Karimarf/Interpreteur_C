@@ -39,9 +39,18 @@ Token * expression_assign(Token * tokens)
 }
 
 
+
 NodeList * list = NULL;
 
-
+void print_all_variables()
+{
+    NodeList *ptr = list;
+    while (ptr != NULL)
+    {
+        printf("Variable: %s, Valeur: %d\n", ptr->key, ptr->value);
+        ptr = ptr->next;
+    }
+}
 
 
 void ajout(char* key, int value)
@@ -53,7 +62,10 @@ void ajout(char* key, int value)
 
     link->next = list;
     list = link;
+
+    printf("Ajouté : %s = %d\n", link->key, link->value);
 }
+
 
 
 

@@ -1,6 +1,7 @@
 #ifndef PARSER_H
 #define PARSER_H
 
+#include "ast_builder.h"
 #include "lexer.h"
 
 
