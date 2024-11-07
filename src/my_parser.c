@@ -107,6 +107,16 @@ Token* expression_in_identifier(Token* tokens) {
     }
     expression_tokens[j] = *create_token(TOKEN_EOF, "EOF");
 
+    for (int i = 0; i < token_count; i++) {
+        if (expression_tokens[i].type == TOKEN_IDENTIFIER) {
+            int value = recher(expression_tokens[i].value);
+            char value_str[20];
+            snprintf(value_str, sizeof(value_str), "%d", value);
+
+            expression_tokens[i] = *create_token(TOKEN_NUMBER, value_str);
+        }
+    }
+
     Token* postfix_tokens = shunting_yard(expression_tokens);
 
     Node* ast_root = create_ast(postfix_tokens);
@@ -149,6 +159,17 @@ Token* expression_new_identifier(Token* tokens) {
             expression_tokens[j++] = tokens[i];
         }
     }
+
+    for (int i = 0; i < token_count; i++) {
+        if (expression_tokens[i].type == TOKEN_IDENTIFIER) {
+            int value = recher(expression_tokens[i].value);
+            char value_str[20];
+            snprintf(value_str, sizeof(value_str), "%d", value);
+
+            expression_tokens[i] = *create_token(TOKEN_NUMBER, value_str);
+        }
+    }
+
     expression_tokens[j] = *create_token(TOKEN_EOF, "EOF");
 
     Token* postfix_tokens = shunting_yard(expression_tokens);
