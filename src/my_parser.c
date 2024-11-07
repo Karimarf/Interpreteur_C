@@ -49,15 +49,50 @@ Token* expression_in_fonction_tokens(Token* tokens) {
             i++;
             continue;
         }
+
         if (inside_parentheses || parentheses_level > 0) {
             expression_tokens[token_count++] = tokens[i];
         }
 
         i++;
     }
+
     expression_tokens[token_count] = *create_token(TOKEN_EOF, "EOF");
-    return expression_tokens;
+
+    for (int i = 0; i < token_count; i++) {
+        if (expression_tokens[i].type == TOKEN_IDENTIFIER) {
+            if (check_if_defined(expression_tokens[i].value) == 0) {
+                free(expression_tokens);
+                printf("Erreur : La variable '%s' n'est pas définie.\n", expression_tokens[i].value);
+                exit(EXIT_FAILURE);
+            }
+        }
+    }
+
+    for (int i = 0; i < token_count; i++) {
+        if (expression_tokens[i].type == TOKEN_IDENTIFIER) {
+            int value = recher(expression_tokens[i].value);
+            char value_str[20];
+            snprintf(value_str, sizeof(value_str), "%d", value);
+
+            expression_tokens[i] = *create_token(TOKEN_NUMBER, value_str);
+        }
+    }
+
+    Token* postfix_tokens = shunting_yard(expression_tokens);
+
+    Node* ast_root = create_ast(postfix_tokens);
+    int result_value = evaluate(ast_root);
+
+    printf("%d",result_value);
+
+
+    free(expression_tokens);
+    free(postfix_tokens);
+    freeAST(ast_root);
 }
+
+
 
 Token* expression_in_identifier(Token* tokens) {
     int token_count = 0;
@@ -80,7 +115,7 @@ Token* expression_in_identifier(Token* tokens) {
 
     const char* var_name = tokens[0].value;
 
-    if (print_v(var_name) == 0) {
+    if (check_if_defined(var_name) == 0) {
         free(expression_tokens);
         free(postfix_tokens);
         printf("Erreur  : La variable '%s' n'est pas definie.\n", var_name);
@@ -89,8 +124,6 @@ Token* expression_in_identifier(Token* tokens) {
 
     modif(var_name, result_value);
 
-    int test = recher(var_name);
-    printf("test = %d\n", test);
 
     free(var_name);
     free(expression_tokens);
@@ -127,8 +160,6 @@ Token* expression_new_identifier(Token* tokens) {
     const char* var_name = tokens[1].value;
     ajout(var_name, result_value);
 
-    int test = recher(var_name);
-    printf("test = %d\n", test);
 
     free(var_name);
     free(expression_tokens);

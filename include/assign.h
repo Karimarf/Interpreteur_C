@@ -27,6 +27,7 @@ extern int recher(char * key);
 extern void modif(char * key, int value);
 int print_v(Token* token);
 extern void print_all_variables();
+extern int check_if_defined(char* key);
 extern void assign(Token* token);
 
 

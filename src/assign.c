@@ -63,7 +63,6 @@ void ajout(char* key, int value)
     link->next = list;
     list = link;
 
-    printf("Ajouté : %s = %d\n", link->key, link->value);
 }
 
 
@@ -104,6 +103,20 @@ void modif(char* key, int value)
 int print_v(Token * token)
 {
     return recher(token->value);
+}
+
+int check_if_defined(char* key)
+{
+    NodeList *ptr = list;
+    while (ptr != NULL)
+    {
+        if(strcmp(ptr->key, key) == 0)
+        {
+            return 1;
+        }
+        ptr = ptr->next;
+    }
+    return 0;
 }
 
 
