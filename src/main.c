@@ -14,6 +14,9 @@ int main()
 {
     char input[256];
     NodeList* var_list = NULL;
+
+
+
     while (1) {
         printf("\nEntrez une expression (ou tapez 0 pour quitter): \n");
         fgets(input, 256, stdin);

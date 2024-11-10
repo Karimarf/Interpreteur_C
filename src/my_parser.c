@@ -62,8 +62,8 @@ Token* expression_in_fonction_tokens(Token* tokens) {
     for (int i = 0; i < token_count; i++) {
         if (expression_tokens[i].type == TOKEN_IDENTIFIER) {
             if (check_if_defined(expression_tokens[i].value) == 0) {
+                printf("Erreur : La variable '%s' n'est pas definie.\n", expression_tokens[i].value);
                 free(expression_tokens);
-                printf("Erreur : La variable '%s' n'est pas définie.\n", expression_tokens[i].value);
                 exit(EXIT_FAILURE);
             }
         }
@@ -72,6 +72,11 @@ Token* expression_in_fonction_tokens(Token* tokens) {
     for (int i = 0; i < token_count; i++) {
         if (expression_tokens[i].type == TOKEN_IDENTIFIER) {
             int value = recher(expression_tokens[i].value);
+            if (value == 0) {
+                printf("Erreur  : La variable '%s' n'est pas definie.\n", expression_tokens[i].value);
+                free(expression_tokens);
+                exit(EXIT_FAILURE);
+            }
             char value_str[20];
             snprintf(value_str, sizeof(value_str), "%d", value);
 
@@ -110,6 +115,11 @@ Token* expression_in_identifier(Token* tokens) {
     for (int i = 0; i < token_count; i++) {
         if (expression_tokens[i].type == TOKEN_IDENTIFIER) {
             int value = recher(expression_tokens[i].value);
+            if (value == 0) {
+                printf("Erreur  : La variable '%s' n'est pas definie.\n", expression_tokens[i].value);
+                free(expression_tokens);
+                exit(EXIT_FAILURE);
+            }
             char value_str[20];
             snprintf(value_str, sizeof(value_str), "%d", value);
 
@@ -163,6 +173,11 @@ Token* expression_new_identifier(Token* tokens) {
     for (int i = 0; i < token_count; i++) {
         if (expression_tokens[i].type == TOKEN_IDENTIFIER) {
             int value = recher(expression_tokens[i].value);
+            if (value == 0) {
+                printf("Erreur  : La variable '%s' n'est pas definie.\n", expression_tokens[i].value);
+                free(expression_tokens);
+                exit(EXIT_FAILURE);
+            }
             char value_str[20];
             snprintf(value_str, sizeof(value_str), "%d", value);
 
@@ -190,24 +205,6 @@ Token* expression_new_identifier(Token* tokens) {
 }
 
 
-
-Token* expression_edit_value(Token* tokens) {
-    int token_count = 0;
-    for (int i = 1; tokens[i].type != TOKEN_EOF; i++) {
-        if (tokens[i].type != TOKEN_ASSIGN && tokens[i].type != TOKEN_SEMICOLON) {
-            token_count++;
-        }
-    }
-    Token* expression_tokens = malloc((token_count + 1) * sizeof(Token));
-    int j = 0;
-    for (int i = 2; tokens[i].type != TOKEN_EOF; i++) {
-        if (tokens[i].type != TOKEN_ASSIGN && tokens[i].type != TOKEN_SEMICOLON) {
-            expression_tokens[j++] = tokens[i];
-        }
-    }
-    expression_tokens[j] = *create_token(TOKEN_EOF, "EOF");
-    return expression_tokens;
-}
 
 int prio(char operator) {
     if (operator == '+' || operator == '-') {
