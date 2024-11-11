@@ -1,6 +1,7 @@
 #ifndef AST_H
 #define AST_H
-#include "..\include\lexer.h"
+
+#include <lexer.h>
 
 
 

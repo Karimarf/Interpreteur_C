@@ -1,11 +1,9 @@
 #include <stdio.h>
-#include <stdlib.h>
 #include <string.h>
-#include "../include/assign.h"
-#include "../include/lexer.h"
-#include "../include/my_parser.h"
-#include "../include/ast_builder.h"
-#include "../include/error.h"
+#include <assign.h>
+#include <lexer.h>
+#include <read_file.h>
+#include <interactive_mode.h>
 
 
 Token * inputs_error(Token * token);
@@ -13,40 +11,32 @@ Token * inputs_error(Token * token);
 int main()
 {
     char input[256];
+
     NodeList* var_list = NULL;
 
-
-
     while (1) {
-        printf("\nEntrez une expression (ou tapez 0 pour quitter): \n");
+        printf("--------- MENU ---------\n");
+        printf("1- Mode interactif \n");
+        printf("2- Lecture d'un fichier \n");
+        printf("0- Quitter \n");
+        printf("> ");
         fgets(input, 256, stdin);
 
-        if (strcmp(input, "0\n") == 0) {
+        if (strcmp(input, "1\n") == 0){
+            interactive_mode();
+        }
+        else if (strcmp(input, "2\n") == 0) {
+            read_file_mode();
+        }
+        else if (strcmp(input, "0\n") == 0) {
             printf("Sortie du programme.\n");
-            break;
+            return 0;
         }
-
-        Token* tokens = lexer(input);
-        Token* errors = inputs_error(tokens);
-        Token* expression_tokens;
-
-        if (tokens[0].type == TOKEN_FONCTION) {
-            expression_tokens = expression_in_fonction_tokens(tokens);
-            continue;
-        } else if (tokens[0].type == TOKEN_IDENTIFIER) {
-            expression_tokens = expression_in_identifier(tokens);
-            continue;
-        } else if (tokens[0].type == TOKEN_TYPE && tokens[2].type == TOKEN_ASSIGN) {
-            expression_tokens = expression_new_identifier(tokens);
-            continue;
-        } else {
-            printf("Expression non reconnue.\n");
-            free(tokens);
-            continue;
+        else {
+            printf("Entrée invalide \n");
         }
-
-        free(tokens);
-        free(expression_tokens);
     }
-    return 0;
+
 }
+
+
