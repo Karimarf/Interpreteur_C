@@ -1,6 +1,7 @@
+#include <../include/lexer.h>
 #include <stdlib.h>
 #include <string.h>
-#include "..\include\lexer.h"
+
 
 Token* create_token(TokenType type, const char* value) {
     Token* token = malloc(sizeof(Token));
@@ -15,7 +16,7 @@ int is_number(char c) {
 }
 
 int is_letter(char c) {
-    return (c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z');
+    return ((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z'));
 }
 
 int is_operator(char c) {
@@ -60,9 +61,9 @@ Token* lexer(const char* input) {
             strncpy(identifier, &input[start], i - start);
             identifier[i - start] = '\0';
 
-            if (strcmp(identifier, "print") == 0) { // Correct
+            if (strcmp(identifier, "print") == 0 || strcmp(identifier, "read") == 0 ) { // Correct
                 tokens[token_count++] = *create_token(TOKEN_FONCTION, identifier);
-            } else if (strcmp(identifier, "int") == 0 || strcmp(identifier, "char") == 0 || strcmp(identifier, "float") == 0) {
+            }else if (strcmp(identifier, "int") == 0 || strcmp(identifier, "char") == 0 || strcmp(identifier, "float") == 0) {
                 tokens[token_count++] = *create_token(TOKEN_TYPE, identifier);
             } else {
                 tokens[token_count++] = *create_token(TOKEN_IDENTIFIER, identifier);
@@ -82,6 +83,7 @@ Token* lexer(const char* input) {
             i++;
             continue;
         }
+
         if (input[i] == '(') {
             tokens[token_count++] = *create_token(TOKEN_OPAREN, "(");
             i++;
@@ -105,13 +107,15 @@ Token* lexer(const char* input) {
             continue;
         }
 
-
         if (input[i] == ';') {
             tokens[token_count++] = *create_token(TOKEN_SEMICOLON, ";");
             break;
         }
+
+
         i++;
     }
     tokens[token_count++] = *create_token(TOKEN_EOF, "EOF");
     return tokens;
+
 }

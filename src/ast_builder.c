@@ -1,6 +1,7 @@
+#include <../include/ast_builder.h>
 #include <stdlib.h>
 #include <stdio.h>
-#include "../include/ast_builder.h"
+
 
 
 void initStack(Stack* stack) {

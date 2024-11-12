@@ -1,7 +1,7 @@
-#ifndef PARSER_H
-#define PARSER_H
+#ifndef ERROR_H
+#define ERROR_H
 
-#include "../include/lexer.h"
+#include <lexer.h>
 
 
 Token* inputs_error(Token* tokens) ;
