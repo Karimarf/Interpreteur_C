@@ -1,9 +1,9 @@
 #include <stdio.h>
 #include <string.h>
-#include <assign.h>
-#include <lexer.h>
-#include <read_file.h>
-#include <interactive_mode.h>
+#include <../include/assign.h>
+#include <../include/lexer.h>
+#include <../include/read_file.h>
+#include <../include/interactive_mode.h>
 
 
 Token * inputs_error(Token * token);

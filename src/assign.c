@@ -1,9 +1,9 @@
-#include <assign.h>
+#include <../include/assign.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include <lexer.h>
-#include <my_parser.h>
-#include <ast_builder.h>
+#include <../include/lexer.h>
+#include <../include/my_parser.h>
+#include <../include/ast_builder.h>
 #include <string.h>
 
 

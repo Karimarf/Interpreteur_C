@@ -1,8 +1,8 @@
-#include <interactive_mode.h>
-#include <assign.h>
-#include <error.h>
-#include <lexer.h>
-#include <my_parser.h>
+#include <../include/interactive_mode.h>
+#include <../include/assign.h>
+#include <../include/error.h>
+#include <../include/lexer.h>
+#include <../include/my_parser.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>

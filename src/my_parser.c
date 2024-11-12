@@ -1,18 +1,18 @@
-#include <my_parser.h>
+#include <../include/my_parser.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <assign.h>
-#include <lexer.h>
-#include <ast_builder.h>
-#include <print_value.h>
-#include <error.h>
+#include <../include/assign.h>
+#include <../include/lexer.h>
+#include <../include/ast_builder.h>
+#include <../include/print_value.h>
 
 
 Token* expression_in_fonction_tokens(Token* tokens) {
 
     if(tokens[0].type == TOKEN_FONCTION && strcmp(tokens[0].value, "print") == 0) {
         print_value(tokens);
+
     }
 
 }

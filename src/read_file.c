@@ -1,11 +1,11 @@
-#include <read_file.h>
+#include <../include/read_file.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <assign.h>
-#include <lexer.h>
-#include <my_parser.h>
-#include <error.h>
+#include <../include/assign.h>
+#include <../include/lexer.h>
+#include <../include/my_parser.h>
+#include <../include/error.h>
 
 int read_files(const char* input) {
     int i = 0;
@@ -17,10 +17,10 @@ int read_files(const char* input) {
     FILE* file = fopen(input, "r");
 
     if(file == NULL) {
-        fprintf(stderr,"Fichier non trouvé pour '%s'\n", input);
+        fprintf(stderr,"Fichier non trouve pour '%s'\n", input);
         exit(EXIT_FAILURE);
     }
-    printf("Fichier trouvé pour '%s'\n", input);
+    printf("Fichier trouve pour '%s'\n", input);
     char line[256];
     while (fgets(line, sizeof(line), file)) {
         Token* tokens = lexer(line);
