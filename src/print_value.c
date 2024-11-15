@@ -86,6 +86,7 @@ void print_value(Token* tokens) {
     Token* postfix_tokens = shunting_yard(expression_tokens);
 
     Node* ast_root = create_ast(postfix_tokens);
+    displayAST(ast_root, 0);
     int result_value = evaluate(ast_root);
 
     printf("%d\n",result_value);

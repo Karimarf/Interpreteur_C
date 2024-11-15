@@ -74,6 +74,7 @@ Node* create_ast(Token* shunting_yd_exp) {
     }
     return Shunting_yard_nodes;
 }
+
 void printAst(Node* node) {
     printf("%s \n", node->token->value);
     if(node->leftNode != NULL) {
@@ -83,6 +84,36 @@ void printAst(Node* node) {
     if(node->rightNode != NULL) {
         printf("Right: ");
         printAst(node->rightNode);
+    }
+}
+
+void displayAST(Node* node, int level)
+{
+    if(node == NULL)
+    {
+        return;
+    }
+
+    if(level)
+    {
+        printf("%c[\"%s\"] \n", level + 'A', node->token->value);
+    }
+    int current = level;
+
+    level++;
+
+    if(node->leftNode)
+    {
+        printf("%c[\"%s\"] --> ", current + 'A', node->token->value);
+        displayAST(node->leftNode, level);
+    }
+
+    level++;
+
+    if(node->rightNode)
+    {
+        printf("%c[\"%s\"] --> ", current + 'A', node->token->value);
+        displayAST(node->rightNode, level);
     }
 }
 

@@ -4,7 +4,6 @@
 #include <lexer.h>
 
 
-
 typedef struct Node {
     Token * token;
     struct Node* leftNode;
@@ -30,6 +29,7 @@ void push(Stack* stack, Node* node);
 Node* pop(Stack* stack);
 Node* create_ast(Token* shunting_yd_exp);
 void printAst(Node* node);
+void displayAST(Node* node, int level);
 int evaluate(Node* node);
 void freeAST(Node* node);
 
