@@ -4,8 +4,8 @@
 #ifndef ASSIGN_H
 #define ASSIGN_H
 
-#include <lexer.h>
-#include <ast_builder.h>
+#include "lexer.h"
+#include "ast_builder.h"
 
 typedef struct Assign
 {

@@ -2,7 +2,7 @@
 #define PARSER_H
 
 
-#include <lexer.h>
+#include "lexer.h"
 
 
 Token* expression_in_fonction_tokens(Token* tokens);

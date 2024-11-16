@@ -1,11 +1,11 @@
-#include <../include/read_file.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <../include/assign.h>
-#include <../include/lexer.h>
-#include <../include/my_parser.h>
-#include <../include/error.h>
+#include "../include/assign.h"
+#include "../include/lexer.h"
+#include "../include/interpret.h"
+#include "../include/error.h"
+#include "../include/read_file.h"
 
 int read_files(const char* input) {
     int i = 0;
@@ -25,24 +25,10 @@ int read_files(const char* input) {
     while (fgets(line, sizeof(line), file)) {
         Token* tokens = lexer(line);
         Token* errors = inputs_error(tokens);
-        Token* expression_tokens;
 
-        if (tokens[0].type == TOKEN_FONCTION) {
-            expression_tokens = expression_in_fonction_tokens(tokens);
-            continue;
-        } else if (tokens[0].type == TOKEN_IDENTIFIER) {
-            expression_tokens = expression_in_identifier(tokens);
-            continue;
-        } else if (tokens[0].type == TOKEN_TYPE && tokens[2].type == TOKEN_ASSIGN) {
-            expression_tokens = expression_new_identifier(tokens);
-            continue;
-        } else {
-            fprintf(stderr, "Expression non reconnue.\n");
-            free(tokens);
-            continue;
-        }
+        interpret(tokens);
         free(tokens);
-        free(expression_tokens);
+
     }
     fclose(file);
     return 0;
