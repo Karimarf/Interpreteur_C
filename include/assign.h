@@ -7,13 +7,6 @@
 #include "lexer.h"
 #include "ast_builder.h"
 
-typedef struct Assign
-{
-    Token* token;
-    Node* leftNode;
-    Node* rightNode;
-} Assign;
-
 typedef struct NodeList
 {
     char * key;
@@ -22,14 +15,12 @@ typedef struct NodeList
 } NodeList;
 
 
-extern Token * expression_assign(Token* token);
 extern void ajout(char * key, int value);
 extern int recher(char * key);
 extern void modif(char * key, int value);
 int print_v(Token* token);
 extern void print_all_variables();
 extern int check_if_defined(char* key);
-extern void assign(Token* token);
 
 
 #endif

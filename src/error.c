@@ -9,7 +9,7 @@ Token *inputs_error(Token *tokens) {
     int parentheses_balance = 0;
     int i = 0;
 
-
+        // ERREURS SUR LES PREMIERS TOKENS
     if (tokens[0].type == TOKEN_IDENTIFIER && tokens[1].type == TOKEN_OPAREN) {
         printf("Erreur 1 : L'identifiant '%s' n'est pas une fonction valide.\n", tokens[0].value);
         exit(EXIT_FAILURE);
@@ -35,6 +35,7 @@ Token *inputs_error(Token *tokens) {
         exit(EXIT_FAILURE);
     }
 
+    // ERREURS DANS L'EXPRESSION
     while (tokens[i].type != TOKEN_EOF) {
         if (tokens[i].type == TOKEN_OPAREN) {
             parentheses_balance++;
@@ -93,7 +94,7 @@ Token *inputs_error(Token *tokens) {
 
         i++;
     }
-
+    // ERREURS A LA FIN DE L'EXPRESSION
     if (tokens[i - 1].type != TOKEN_SEMICOLON) {
         printf("Erreur 11 : Expression ne se termine pas par un ';'.\n");
         exit(EXIT_FAILURE);
