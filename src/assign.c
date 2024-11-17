@@ -134,6 +134,7 @@ void assign(Token * assign_token)
 
     Node * value_node = create_ast(shunting_yard(value_token));
     int value = evaluate(value_node);
+    displayAST(value_node, 0);
     if(recher(var_name))
     {
         modif(var_name, value);

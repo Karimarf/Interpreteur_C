@@ -48,7 +48,7 @@ Token* expression_in_identifier(Token* tokens) {
     Token* postfix_tokens = shunting_yard(expression_tokens);
 
     Node* ast_root = create_ast(postfix_tokens);
-
+    displayAST(ast_root, 0);
     int result_value = evaluate(ast_root);
 
     const char* var_name = tokens[0].value;
@@ -108,7 +108,7 @@ Token* expression_new_identifier(Token* tokens) {
     Token* postfix_tokens = shunting_yard(expression_tokens);
 
     Node* ast_root = create_ast(postfix_tokens);
-
+    displayAST(ast_root, 0);
     int result_value = evaluate(ast_root);
 
     const char* var_name = tokens[1].value;
