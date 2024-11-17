@@ -84,13 +84,6 @@ Token *inputs_error(Token *tokens) {
             exit(EXIT_FAILURE);
         }
 
-        if (tokens[i].type == TOKEN_OPERATOR) {
-            if ((tokens[i - 1].type != TOKEN_NUMBER && tokens[i - 1].type != TOKEN_IDENTIFIER) ||
-                (tokens[i + 1].type != TOKEN_NUMBER && tokens[i + 1].type != TOKEN_IDENTIFIER)) {
-                printf("Erreur 13 : Syntaxe incorrecte. Operateur '%s' doit etre entre un nombre et/ou un identifiant.\n", tokens[i].value);
-                exit(EXIT_FAILURE);
-                }
-        }
 
         i++;
     }
